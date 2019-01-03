@@ -69,15 +69,31 @@ function multiplyCommand(arguments, receivedMessage) {
 }
 
 function rollCommand(arguments, receivedMessage) {
-  if (!!arguments){
+  if (arguments === ""){
     receivedMessage.channel.send("Not enough dice to roll. Try `!roll 1d6` to roll 1 six-sided dice")
     return
   }
   else{
+    var sum = 0;
+    var resultString = "";
     arguments.forEach((value)=>{
-      var pattern = ([1-9]\\d*)?d([1-9]\\d*)([/x][1-9]\\d*)?([+-]\\d+)?;
+      // var pattern = "([1-9]\\d*)?d([1-9]\\d*)([/x][1-9]\\d*)?([+-]\\d+)?";
+      // console.log(value.split('([1-9]\\d*)?d([1-9]\\d*)([/x][1-9]\\d*)?([+-]\\d+)?'));
 
+      var regex = /^(\d*)d(\d+)([-+]\d+)*/;
+      values = value.match(regex).slice(1),
+      a = parseInt(values[0]) || 1,
+      b = parseInt(values[1]),
+      c = parseInt(values[2]) || 0;
+      for (i = 0; i < a; i++){
+        var randomNumber = Math.floor(Math.random() * (b)) + 1;
+        resultString += randomNumber + " + ";
+        sum += randomNumber;
+      }
+      sum+= c;
+      resultString += c + " ";
     })
+    receivedMessage.channel.send(receivedMessage.author.toString() + " has rolled: " + resultString + "=" + sum);
   }
 }
 
