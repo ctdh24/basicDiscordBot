@@ -73,11 +73,17 @@ function rollCommand(arguments, receivedMessage) {
     receivedMessage.channel.send("Not enough dice to roll. Try `!roll 1d6` to roll 1 six-sided dice")
     return
   }
+  else{
+    arguments.forEach((value)=>{
+      var pattern = ([1-9]\\d*)?d([1-9]\\d*)([/x][1-9]\\d*)?([+-]\\d+)?;
+
+    })
+  }
 }
 
 // Get your bot's secret token from:
 // https://discordapp.com/developers/applications/
 // Click on your application -> Bot -> Token -> "Click to Reveal Token"
-bot_secret_token = "NTMwMTcyNDYyODE0NTkzMDU0.Dw7hWg.dKu3x57P0QRA5agOcvATOQKdWU0"
+bot_secret_token = "xxxxxxxxxx"
 
 client.login(bot_secret_token)
