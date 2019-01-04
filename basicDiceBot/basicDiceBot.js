@@ -77,14 +77,13 @@ function rollCommand(arguments, receivedMessage) {
     var sum = 0;
     var resultString = "";
     arguments.forEach((value)=>{
-      // var pattern = "([1-9]\\d*)?d([1-9]\\d*)([/x][1-9]\\d*)?([+-]\\d+)?";
-      // console.log(value.split('([1-9]\\d*)?d([1-9]\\d*)([/x][1-9]\\d*)?([+-]\\d+)?'));
-
       var regex = /^(\d*)d(\d+)([-+]\d+)*/;
       values = value.match(regex).slice(1),
       a = parseInt(values[0]) || 1,
       b = parseInt(values[1]),
       c = parseInt(values[2]) || 0;
+      console.log(values)
+
       for (i = 0; i < a; i++){
         var randomNumber = Math.floor(Math.random() * (b)) + 1;
         resultString += randomNumber + " + ";
@@ -100,6 +99,7 @@ function rollCommand(arguments, receivedMessage) {
 // Get your bot's secret token from:
 // https://discordapp.com/developers/applications/
 // Click on your application -> Bot -> Token -> "Click to Reveal Token"
-bot_secret_token = "xxxxxxxxxx"
+// replace with token kay for bot
+bot_secret_token = "xxxxxxxxxxxxx"
 
 client.login(bot_secret_token)
