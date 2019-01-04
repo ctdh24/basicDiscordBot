@@ -77,22 +77,27 @@ function rollCommand(arguments, receivedMessage) {
     var sum = 0;
     var resultString = "";
     arguments.forEach((value)=>{
-      var regex = /^(\d*)d(\d+)([-+]\d+)*/;
+      var regex = /^(\d*)d(\d+)([-+]\d+)*x*(\d+)*/;
       values = value.match(regex).slice(1),
       a = parseInt(values[0]) || 1,
       b = parseInt(values[1]),
-      c = parseInt(values[2]) || 0;
-      console.log(values)
-
-      for (i = 0; i < a; i++){
-        var randomNumber = Math.floor(Math.random() * (b)) + 1;
-        resultString += randomNumber + " + ";
-        sum += randomNumber;
+      c = parseInt(values[2]) || 0,
+      d = parseInt(values[3]) || 1;
+      //console.log(d)
+      for (j = 0; j < d; j++){
+        for (i = 0; i < a; i++){
+          var randomNumber = Math.floor(Math.random() * (b)) + 1;
+          resultString += randomNumber + " + ";
+          sum += randomNumber;
+        }
       }
-      sum+= c;
-      resultString += c + " ";
+      sum+= c*d;
+      if (d === 1)
+        resultString += c + " ";
+      else
+        resultString += "("+c + "*" + d + ") ";
     })
-    receivedMessage.channel.send(receivedMessage.author.toString() + " has rolled: " + resultString + "=" + sum);
+    receivedMessage.channel.send(receivedMessage.author.toString() + " has rolled: " + resultString + "= " + sum);
   }
 }
 
@@ -100,6 +105,6 @@ function rollCommand(arguments, receivedMessage) {
 // https://discordapp.com/developers/applications/
 // Click on your application -> Bot -> Token -> "Click to Reveal Token"
 // replace with token kay for bot
-bot_secret_token = "xxxxxxxxxxxxx"
+bot_secret_token = "xxxxxxxxx"
 
 client.login(bot_secret_token)
