@@ -44,6 +44,8 @@ function processCommand(receivedMessage){
         multiplyCommand(arguments, receivedMessage)
     } else if (primaryCommand == "roll") {
         rollCommand(arguments, receivedMessage)
+    } else if (primaryCommand == "stats"){
+        rollStatsCommand(arguments, receivedMessage)
     } else {
         receivedMessage.channel.send("I don't understand the command. Type `!?` for a list of commands.")
     }
@@ -96,6 +98,59 @@ function rollCommand(arguments, receivedMessage) {
         })
         receivedMessage.channel.send(receivedMessage.author.toString() + " has rolled: " + resultString + "= " + sum);
     }
+}
+
+function rollStatsCommand(arguments, receivedMessage){
+    var diceRolls = [];
+    var resultString = "";
+    if (arguments == "standard"){
+        for (i = 0; i < 6; i++){
+            var sum = 0;
+            var array4 = [];
+            for (j = 0; j < 4; j++){
+                array4.push(Math.floor(Math.random() * (6)) + 1);
+            }
+            array4.sort(function(a, b){return b - a});
+            for (j = 0; j < 3; j++){
+                sum += array4[j];
+            }
+            diceRolls.push(sum);
+            if(i < 5)
+                resultString += sum + ", ";
+            else
+                resultString += sum;
+        }
+    } else if (arguments == "classic"){
+        for (i = 0; i < 6; i++){
+            var sum = 0;
+            for (j = 0; j < 3; j++){
+                var randomNumber = Math.floor(Math.random() * (6)) + 1;
+                sum += randomNumber;
+            }
+            diceRolls.push(sum);
+            if(i < 5)
+                resultString += sum + ", ";
+            else
+                resultString += sum;
+        }
+    } else if (arguments == "heroic"){
+        for (i = 0; i < 6; i++){
+            var sum = 0;
+            for (j = 0; j < 2; j++){
+                var randomNumber = Math.floor(Math.random() * (6)) + 1;
+                sum += randomNumber;
+            }
+            diceRolls.push(sum + 6);
+            if(i < 5)
+                resultString += sum + ", ";
+            else
+                resultString += sum;
+        }
+    } else {
+      receivedMessage.channel.send("Invalid stat roll method. Try `standard`, `classic`, or `heroic`");
+      return;
+    }
+    receivedMessage.channel.send(resultString);
 }
 
 // Get your bot's secret token from:
