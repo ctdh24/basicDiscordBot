@@ -6,4 +6,8 @@ List of Commands:
     * Calculates a dice roll from [dice notation] format(https://en.wikipedia.org/wiki/Dice_notation)
       * `!roll 1d6+5` will generate a number between 1 and 6 and then add 5 to the result. 
       * `!roll 1d6+5x3`: This will do the same as above, but this will repeat 3 times.
-  
+  * `!stats <rolling method>`
+    * Calculates 6 stat rolls (STR, DEX, CON, INT, WIS, CHA) using the method provided 
+      * `!stats standard`  (4d6 drop lowest)
+      * `!stats classic` (3d6)
+      * `!stats heroic` (2d6+6)
