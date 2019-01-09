@@ -140,7 +140,8 @@ function rollStatsCommand(arguments, receivedMessage){
                 var randomNumber = Math.floor(Math.random() * (6)) + 1;
                 sum += randomNumber;
             }
-            diceRolls.push(sum + 6);
+            sum += 6;
+            diceRolls.push(sum);
             if(i < 5)
                 resultString += sum + ", ";
             else
